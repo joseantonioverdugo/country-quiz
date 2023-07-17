@@ -3,60 +3,79 @@ import { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 function App() {
-  const [countries, setCountries] = useState([])
+  const [allCountries, setAllCountries] = useState([])
   const [randomCountries, setRandomCountries] = useState([])
   const [randomCountry, setRandomCountry] = useState(null)
+  const [selectedCountry, setSelectedCountry] = useState(null)
   const url = 'https://restcountries.com/v3.1/all'
 
+  // Función para obtener los países desde la API
   const fetchCountries = async () => {
-    const response = await fetch(url)
-    const data = await response.json()
-    console.log(data)
-    const filteredData = data.map((country) => ({
-      name: country.translations.spa.common,
-      flag: country.flags.png,
-      capital: country.capital,
-    }))
-    setCountries(filteredData)
-    console.log(filteredData)
+    try {
+      const response = await fetch(url)
+      const data = await response.json()
+      const filteredData = data.map((country) => ({
+        name: country.translations.spa.common,
+        flag: country.flags.png,
+        capital: country.capital,
+      }))
+      setAllCountries(filteredData)
+    } catch (error) {
+      console.error('Error al obtener los países:', error)
+    }
   }
 
-  const fourRandomCountries = () => {
+  // Función para obtener cuatro países aleatorios
+  const getRandomCountries = () => {
     const randomCountries = []
-    for (let i = 0; i < 4; i++) {
-      const random = Math.floor(Math.random() * countries.length)
-      randomCountries.push(countries[random])
+    while (randomCountries.length < 4) {
+      const randomIndex = Math.floor(Math.random() * allCountries.length)
+      const country = allCountries[randomIndex]
+      if (!randomCountries.includes(country)) {
+        randomCountries.push(country)
+      }
     }
     return randomCountries
   }
 
-  const filterAnswers = (selectedCountry) => {
-    const answer = randomCountries.filter(
-      (country) =>
-        country === randomCountry && country.name === selectedCountry.name
-    )
-    if (answer.length > 0) {
+  // Función para iniciar una nueva pregunta
+  const startNewQuestion = () => {
+    const randomCountries = getRandomCountries()
+    // Asignar los países aleatorios al estado
+    setRandomCountries(randomCountries)
+    const randomCountry = randomCountries[Math.floor(Math.random() * 4)]
+    // Asignar el país aleatorio al estado
+    setRandomCountry(randomCountry)
+    setSelectedCountry(null)
+  }
+
+  // Función para manejar la selección de respuestas
+  const handleAnswerSelection = (selectedCountry) => {
+    setSelectedCountry(selectedCountry)
+
+    if (randomCountry.name === selectedCountry.name) {
       console.log('El país coincide')
     } else {
       console.log('El país no coincide')
     }
-    return answer
+
+    // Esperar 1.5 segundos antes de iniciar una nueva pregunta
+    setTimeout(() => {
+      startNewQuestion()
+    }, 1500)
   }
 
+  // Cargar los países al montar el componente
   useEffect(() => {
     fetchCountries()
   }, [])
 
+  // Generar una nueva pregunta cuando se actualiza el estado de los países
   useEffect(() => {
-    if (countries.length > 0) {
-      const randomCountries = fourRandomCountries()
-      setRandomCountries(randomCountries)
-      console.log(randomCountries)
-      const randomCountry = randomCountries[Math.floor(Math.random() * 4)]
-      setRandomCountry(randomCountry)
-      console.log(randomCountry)
+    if (allCountries.length > 0) {
+      startNewQuestion()
     }
-  }, [countries])
+  }, [allCountries])
 
   return (
     <div>
@@ -71,8 +90,15 @@ function App() {
       <div className='container'>
         <hr />
         {randomCountries.map((country) => {
+          const isCorrect = randomCountry.name === country.name
+          const isSelected =
+            selectedCountry && selectedCountry.name === country.name
+
           return (
-            <div key={uuidv4()} onClick={() => filterAnswers(country)}>
+            <div
+              key={uuidv4()}
+              onClick={() => handleAnswerSelection(country)}
+              className={isSelected ? (isCorrect ? 'correct' : 'wrong') : ''}>
               <h2>{country.name}</h2>
             </div>
           )
