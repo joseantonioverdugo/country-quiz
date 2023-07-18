@@ -1,5 +1,6 @@
 import './App.css'
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 
 function App() {
@@ -7,7 +8,10 @@ function App() {
   const [randomCountries, setRandomCountries] = useState([])
   const [randomCountry, setRandomCountry] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState(null)
+  const [score, setScore] = useState(0)
+  const [hasAnswered, setHasAnswered] = useState(false)
   const url = 'https://restcountries.com/v3.1/all'
+  const navigate = useNavigate()
 
   // Función para obtener los países desde la API
   const fetchCountries = async () => {
@@ -51,16 +55,25 @@ function App() {
 
   // Función para manejar la selección de respuestas
   const handleAnswerSelection = (selectedCountry) => {
+    if (hasAnswered) return
+
     setSelectedCountry(selectedCountry)
+    setHasAnswered(true)
 
     if (randomCountry.name === selectedCountry.name) {
       console.log('El país coincide')
+      setScore(score + 1)
+      console.log('Número de aciertos:', score)
     } else {
       console.log('El país no coincide')
+      setTimeout(() => {
+        navigate('/result', { state: { score } })
+      }, 1500)
     }
 
     // Esperar 1.5 segundos antes de iniciar una nueva pregunta
     setTimeout(() => {
+      setHasAnswered(false)
       startNewQuestion()
     }, 1500)
   }
