@@ -1,0 +1,16 @@
+@mixin flex($a, $b, $c, $d) {
+  display: flex;
+  flex-flow: $a $b;
+  justify-content: $c;
+  @if $b == 'nowrap' {
+    align-items: $d;
+  } @else {
+    align-content: $d;
+  }
+}
+
+@mixin media($medida: 720px) {
+  @media screen and (max-width: $medida) {
+    @content;
+  }
+}

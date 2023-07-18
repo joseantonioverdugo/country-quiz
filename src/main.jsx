@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import App from './App.jsx'
 import Result from './Result.jsx'
-import './index.css'
+import '../src/scss/app.scss'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

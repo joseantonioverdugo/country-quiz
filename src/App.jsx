@@ -1,4 +1,3 @@
-import './App.css'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
@@ -91,31 +90,37 @@ function App() {
   }, [allCountries])
 
   return (
-    <div>
-      <h1>Country Quiz</h1>
-      <h3>País para hacer la pregunta:</h3>
-      {randomCountry && (
-        <div>
-          <h2>{randomCountry.name}</h2>
-          <img src={randomCountry.flag} alt={randomCountry.name} />
-        </div>
-      )}
-      <div className='container'>
-        <hr />
-        {randomCountries.map((country) => {
-          const isCorrect = randomCountry.name === country.name
-          const isSelected =
-            selectedCountry && selectedCountry.name === country.name
+    <div className='Quiz'>
+      <h1 className='Quiz-h1'>Country Quiz</h1>
+      <div className='Quiz-container'>
+        <img className='Quiz-svg' src='src\assets\quiz.svg' alt='world image' />
+        {randomCountry && (
+          <div>
+            <img
+              className='Quiz-img'
+              src={randomCountry.flag}
+              alt={randomCountry.name}
+            />
+          </div>
+        )}
+        <h3 className='Quiz-question'>¿A qué país pertenece esta bandera?</h3>
+        <div className='Quiz-bottom'>
+          <hr />
+          {randomCountries.map((country) => {
+            const isCorrect = randomCountry.name === country.name
+            const isSelected =
+              selectedCountry && selectedCountry.name === country.name
 
-          return (
-            <div
-              key={uuidv4()}
-              onClick={() => handleAnswerSelection(country)}
-              className={isSelected ? (isCorrect ? 'correct' : 'wrong') : ''}>
-              <h2>{country.name}</h2>
-            </div>
-          )
-        })}
+            return (
+              <div
+                key={uuidv4()}
+                onClick={() => handleAnswerSelection(country)}
+                className={isSelected ? (isCorrect ? 'correct' : 'wrong') : ''}>
+                <h2 className='Quiz-option'>{country.name}</h2>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )
