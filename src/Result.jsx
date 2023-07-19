@@ -1,13 +1,28 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
 export default function Result() {
   const location = useLocation()
   const { score } = location.state
 
   return (
-    <div>
-      <h1>Result</h1>
-      <h2>Score: {score}</h2>
+    <div className='Result'>
+      <h1 className='Result-h1'>Country Quiz</h1>
+      <div className='Result-container'>
+        <img
+          className='Result-svg'
+          src='src\assets\result.svg'
+          alt='champion image'
+        />
+        <div className='Result-bottom'>
+          <h2 className='Result-h2'>Results</h2>
+          <p className='Result-p'>
+            You got <span className='Result-span'>{score}</span> correct answers
+          </p>
+          <Link to='/' className='Result-link'>
+            Try again
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

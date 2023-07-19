@@ -115,8 +115,14 @@ function App() {
               <div
                 key={uuidv4()}
                 onClick={() => handleAnswerSelection(country)}
-                className={isSelected ? (isCorrect ? 'correct' : 'wrong') : ''}>
-                <h2 className='Quiz-option'>{country.name}</h2>
+                className={`Quiz-option ${
+                  isSelected
+                    ? isCorrect
+                      ? 'Quiz-option--correct'
+                      : 'Quiz-option--wrong'
+                    : ''
+                }`}>
+                <h2 className='Quiz-response'>{country.name}</h2>
               </div>
             )
           })}
