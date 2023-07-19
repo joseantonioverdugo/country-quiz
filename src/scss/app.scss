@@ -64,7 +64,8 @@ body {
 
   &-option {
     margin: 1rem 0;
-    width: 25rem;
+    max-width: 25rem;
+    width: 100%;
     height: 3.5rem;
     border-radius: 0.75rem;
     border: 2px solid var(--borde);
@@ -97,11 +98,11 @@ body {
       content: 'D';
     }
 
-    &:hover {
-      background-color: #f9a826;
-      color: var(--blanco-texto);
-      border: 2px solid var(--amarillo);
-    }
+    // &:hover {
+    //   background-color: #f9a826;
+    //   color: var(--blanco-texto);
+    //   border: 2px solid var(--amarillo);
+    // }
 
     &--correct {
       background-color: var(--verde);
@@ -208,5 +209,11 @@ body {
     font-weight: 600;
     line-height: normal;
     @include flex(column, nowrap, center, center);
+    transition: all 0.3s ease-in;
+
+    &:hover {
+      background-color: var(--azul);
+      color: var(--blanco-texto);
+    }
   }
 }

@@ -9,6 +9,7 @@ function App() {
   const [selectedCountry, setSelectedCountry] = useState(null)
   const [score, setScore] = useState(0)
   const [hasAnswered, setHasAnswered] = useState(false)
+  const [correctAnswer, setCorrectAnswer] = useState(null)
   const url = 'https://restcountries.com/v3.1/all'
   const navigate = useNavigate()
 
@@ -65,6 +66,8 @@ function App() {
       console.log('Número de aciertos:', score)
     } else {
       console.log('El país no coincide')
+      setCorrectAnswer(randomCountry.name)
+      console.log(correctAnswer)
       setTimeout(() => {
         navigate('/result', { state: { score } })
       }, 1500)
@@ -110,6 +113,7 @@ function App() {
             const isCorrect = randomCountry.name === country.name
             const isSelected =
               selectedCountry && selectedCountry.name === country.name
+            const shouldShowCorrect = hasAnswered && isCorrect && !isSelected
 
             return (
               <div
@@ -121,7 +125,7 @@ function App() {
                       ? 'Quiz-option--correct'
                       : 'Quiz-option--wrong'
                     : ''
-                }`}>
+                } ${shouldShowCorrect ? 'Quiz-option--correct' : ''}`}>
                 <h2 className='Quiz-response'>{country.name}</h2>
               </div>
             )
