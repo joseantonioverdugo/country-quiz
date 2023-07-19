@@ -13,7 +13,6 @@ body {
 
   &-h1 {
     color: var(--blanco-texto);
-    // font-family: Poppins;
     margin-bottom: 1rem;
     font-size: 2.25rem;
     font-style: normal;
@@ -50,7 +49,6 @@ body {
   &-question {
     margin: 0 2rem 0 2rem;
     color: #1d355d;
-    // font-family: Poppins;
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 700;
@@ -72,8 +70,33 @@ body {
     border: 2px solid var(--borde);
     background: var(--blanco);
     color: var(--letra);
-    @include flex(column, nowrap, center, center);
+    @include flex(row, nowrap, flex-start, center);
     cursor: pointer;
+
+    &::before {
+      content: attr(data-letter) '. ';
+      margin: 0 2rem 0 1rem;
+      font-size: 1.5rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+
+    &:nth-child(2)::before {
+      content: 'A';
+    }
+
+    &:nth-child(3)::before {
+      content: 'B';
+    }
+
+    &:nth-child(4)::before {
+      content: 'C';
+    }
+    &:nth-child(5)::before {
+      content: 'D';
+    }
+
     &:hover {
       background-color: #f9a826;
       color: var(--blanco-texto);
@@ -84,13 +107,26 @@ body {
       background-color: var(--verde);
       color: var(--blanco-texto);
       border: 2px solid var(--verde);
+      background-image: url('../assets/check.svg');
+      background-repeat: no-repeat;
+      background-position: 90% 50%;
     }
 
     &--wrong {
       background-color: var(--rojo);
       color: var(--blanco-texto);
       border: 2px solid var(--rojo);
+      background-image: url('../assets/wrong.svg');
+      background-repeat: no-repeat;
+      background-position: 90% 50%;
     }
+  }
+
+  &-response {
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
 }
 
@@ -103,7 +139,6 @@ body {
 
   &-h1 {
     color: var(--blanco-texto);
-    // font-family: Poppins;
     margin-bottom: 1rem;
     font-size: 2.25rem;
     font-style: normal;
@@ -131,7 +166,6 @@ body {
   &-h2 {
     margin: 0 auto;
     color: var(--azul);
-    // font-family: Poppins;
     font-size: 3rem;
     font-style: normal;
     font-weight: 700;
@@ -142,14 +176,13 @@ body {
     // background-color: #f9a826;
     margin: 0 auto;
     width: 100%;
-    height: 25rem;
+    height: 20.5rem;
     @include flex(column, nowrap, center, center);
   }
 
   &-p {
     margin: 0.5rem auto 6rem auto;
     color: var(--azul);
-    // font-family: Poppins;
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 400;
@@ -164,13 +197,12 @@ body {
     line-height: normal;
   }
   &-link {
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     width: 13.0625rem;
     height: 3.875rem;
     border: 2px solid var(--azul);
     border-radius: 0.8rem;
     color: var(--azul);
-    // font-family: Poppins;
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 600;
