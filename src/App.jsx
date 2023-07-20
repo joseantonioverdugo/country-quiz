@@ -145,7 +145,7 @@ function App() {
                       : 'Quiz-option--wrong'
                     : ''
                 } ${shouldShowCorrect ? 'Quiz-option--correct' : ''}`}>
-                <h2 className='Quiz-response'>{country.name}</h2>
+                <span className='Quiz-response'>{country.name}</span>
               </div>
             )
           })}
