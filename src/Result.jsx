@@ -10,7 +10,7 @@ export default function Result() {
       <div className='Result-container'>
         <img
           className='Result-svg'
-          src='src\assets\result.svg'
+          src='dist\assets\result.svg'
           alt='champion image'
         />
         <div className='Result-bottom'>
