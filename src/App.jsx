@@ -10,6 +10,8 @@ function App() {
   const [score, setScore] = useState(0)
   const [hasAnswered, setHasAnswered] = useState(false)
   const [correctAnswer, setCorrectAnswer] = useState(null)
+  const typeQuestion = ['flag', 'capital']
+  const [typeQuiz, setTypeQuiz] = useState(null) // Add state for type of question
   const url = 'https://restcountries.com/v3.1/all'
   const navigate = useNavigate()
 
@@ -35,7 +37,7 @@ function App() {
     while (randomCountries.length < 4) {
       const randomIndex = Math.floor(Math.random() * allCountries.length)
       const country = allCountries[randomIndex]
-      if (!randomCountries.includes(country)) {
+      if (!randomCountries.some((c) => c.name === country.name)) {
         randomCountries.push(country)
       }
     }
@@ -51,6 +53,8 @@ function App() {
     // Asignar el país aleatorio al estado
     setRandomCountry(randomCountry)
     setSelectedCountry(null)
+    // Generar un nuevo tipo de pregunta (flag o capital)
+    setTypeQuiz(typeQuestion[Math.floor(Math.random() * typeQuestion.length)])
   }
 
   // Función para manejar la selección de respuestas
@@ -74,6 +78,11 @@ function App() {
     }
 
     // Esperar 1.5 segundos antes de iniciar una nueva pregunta
+    startNewQuestionAfterDelay()
+  }
+
+  // Función para iniciar una nueva pregunta después de 1.5 segundos
+  const startNewQuestionAfterDelay = () => {
     setTimeout(() => {
       setHasAnswered(false)
       startNewQuestion()
@@ -85,12 +94,12 @@ function App() {
     fetchCountries()
   }, [])
 
-  // Generar una nueva pregunta cuando se actualiza el estado de los países
+  // Generar una nueva pregunta cuando se actualiza el estado de los países o el tipo de pregunta
   useEffect(() => {
     if (allCountries.length > 0) {
       startNewQuestion()
     }
-  }, [allCountries])
+  }, [allCountries, typeQuiz])
 
   return (
     <div className='Quiz'>
@@ -99,14 +108,24 @@ function App() {
         <img className='Quiz-svg' src='src\assets\quiz.svg' alt='world image' />
         {randomCountry && (
           <div>
-            <img
-              className='Quiz-img'
-              src={randomCountry.flag}
-              alt={randomCountry.name}
-            />
+            {typeQuiz === 'flag' ? (
+              <img
+                className='Quiz-img'
+                src={randomCountry.flag}
+                alt={randomCountry.name}
+              />
+            ) : (
+              ''
+            )}
           </div>
         )}
-        <h3 className='Quiz-question'>¿A qué país pertenece esta bandera?</h3>
+        <h3 className='Quiz-question'>
+          {typeQuiz === 'flag'
+            ? '¿A qué país pertenece esta bandera?'
+            : `¿${
+                randomCountry ? randomCountry.capital : ''
+              } es la capital de?`}
+        </h3>
         <div className='Quiz-bottom'>
           <hr />
           {randomCountries.map((country) => {

@@ -6,12 +6,12 @@ import Result from './Result.jsx'
 import '../src/scss/app.scss'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<App />} />
-        <Route path='/result' element={<Result />} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<App />} />
+      <Route path='/result' element={<Result />} />
+    </Routes>
+  </BrowserRouter>
+  // </React.StrictMode>
 )
