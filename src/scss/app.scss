@@ -6,13 +6,13 @@ body {
 
 .Quiz {
   max-width: 29rem;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0 auto;
   @include flex(column, nowrap, center, center);
 
   &-h1 {
     color: var(--blanco-texto);
-    margin: 0 0 1rem 2rem;
+    margin-bottom: 1rem;
     font-size: 2.25rem;
     font-style: normal;
     font-weight: 700;
@@ -20,7 +20,7 @@ body {
     text-transform: uppercase;
     width: 29rem;
     @include media(31.25rem) {
-      font-size: clamp(1.4rem, 5vw, 2.25rem);
+      font-size: clamp(1.3rem, 5vw, 2.25rem);
       max-width: 22rem;
       width: 100%;
       margin: 0 0 1rem 0;
@@ -36,7 +36,7 @@ body {
     border-radius: 1.5rem;
     max-width: 29rem;
     width: 100%;
-    max-height: 35.3125rem;
+    min-height: 36.3125rem;
     height: 100%;
     @include flex(column, nowrap, space-between, flex-start);
 
@@ -65,11 +65,13 @@ body {
   &-img {
     width: 5.25rem;
     height: 3.375rem;
-    margin: 4rem 0 0 2rem;
+    margin: 2rem 0 1rem 2rem;
   }
 
   &-question {
-    margin: 0 2rem 0 1.5rem;
+    max-width: 22rem;
+    margin: 0 2rem 0 2rem;
+    // background-color: aqua;
     color: #1d355d;
     font-size: 1.5rem;
     font-style: normal;
@@ -172,7 +174,6 @@ body {
 
 .Result {
   max-width: 29rem;
-  background-color: aqua;
   height: 100vh;
   margin: 0 auto;
   padding: 0 1rem;
@@ -187,7 +188,6 @@ body {
     line-height: normal;
     text-transform: uppercase;
     width: 100%;
-    background-color: #1d355d;
     @include media(21.875rem) {
       font-size: clamp(1.6rem, 5vw, 2.25rem);
     }
@@ -238,7 +238,6 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    background-color: lightcoral;
     @include media(21.875rem) {
       text-align: center;
       margin: 0.5rem 0.1rem 6rem;
