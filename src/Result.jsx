@@ -2,7 +2,7 @@ import { useLocation, Link } from 'react-router-dom'
 
 export default function Result() {
   const location = useLocation()
-  const { score } = location.state
+  const { score, bestScore } = location.state
 
   return (
     <div className='Result'>
@@ -10,12 +10,17 @@ export default function Result() {
       <div className='Result-container'>
         <img className='Result-svg' src='/result.png' alt='champion image' />
         <div className='Result-bottom'>
-          <h2 className='Result-h2'>Results</h2>
+          <h2 className='Result-h2'>Resultado</h2>
           <p className='Result-p'>
-            You got <span className='Result-span'>{score}</span> correct answers
+            Has acertado <span className='Result-span'>{score}</span>{' '}
+            {score === 1 ? 'pregunta' : 'preguntas'}
+          </p>
+          <p className='Result-p'>
+            Tu mejor puntuación es:
+            <span className='Result-span'>{bestScore}</span>
           </p>
           <Link to='/' className='Result-link'>
-            Try again
+            Volver a jugar
           </Link>
         </div>
       </div>
