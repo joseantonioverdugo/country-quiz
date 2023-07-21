@@ -105,7 +105,7 @@ function App() {
     <div className='Quiz'>
       <h1 className='Quiz-h1'>Country Quiz</h1>
       <div className='Quiz-container'>
-        <img className='Quiz-svg' src='public\quiz.png' alt='world image' />
+        <img className='Quiz-svg' src='/quiz.png' alt='world image' />
         {randomCountry && (
           <div>
             {typeQuiz === 'flag' ? (

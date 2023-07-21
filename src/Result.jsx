@@ -8,11 +8,7 @@ export default function Result() {
     <div className='Result'>
       <h1 className='Result-h1'>Country Quiz</h1>
       <div className='Result-container'>
-        <img
-          className='Result-svg'
-          src='public/result.png'
-          alt='champion image'
-        />
+        <img className='Result-svg' src='/result.png' alt='champion image' />
         <div className='Result-bottom'>
           <h2 className='Result-h2'>Results</h2>
           <p className='Result-p'>
