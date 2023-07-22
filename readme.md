@@ -1,4 +1,4 @@
-![Imagen del proyecto](https://github.com/joseantonioverdugo/quote-generator/blob/main/src/public/readme-img.png)
+![Imagen del proyecto](https://github.com/joseantonioverdugo/country-quiz/blob/main/public/readme-img.png)
 
 ## Ver ejemplo en vivo
 
