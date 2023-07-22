@@ -11,7 +11,7 @@ function App() {
   const [score, setScore] = useState(0)
   const [hasAnswered, setHasAnswered] = useState(false)
   const [correctAnswer, setCorrectAnswer] = useState(null)
-  const [bestScore, setBestScore] = useState(0) // State to store the best score
+  const [bestScore, setBestScore] = useState(0)
   const url = 'https://restcountries.com/v3.1/all'
   const navigate = useNavigate()
 

@@ -135,11 +135,11 @@ body {
       content: 'D';
     }
 
-    &:hover {
-      background-color: #f9a826;
-      color: var(--blanco-texto);
-      border: 2px solid var(--amarillo);
-    }
+    // &:hover {
+    //   background-color: #f9a826;
+    //   color: var(--blanco-texto);
+    //   border: 2px solid var(--amarillo);
+    // }
 
     &--correct {
       background-color: var(--verde);
