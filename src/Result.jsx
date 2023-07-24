@@ -1,8 +1,13 @@
-import { useLocation, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { DataContext } from './context/DataContext'
 
 export default function Result() {
-  const location = useLocation()
-  const { score, bestScore } = location.state
+  const { score, bestScore, starNewQuestion } = useContext(DataContext)
+
+  const handleStartNewGame = () => {
+    starNewQuestion()
+  }
 
   return (
     <div className='Result'>
@@ -19,7 +24,7 @@ export default function Result() {
             Tu mejor puntuación es:
             <span className='Result-span'>{bestScore}</span>
           </p>
-          <Link to='/' className='Result-link'>
+          <Link to='/' onClick={handleStartNewGame} className='Result-link'>
             Volver a jugar
           </Link>
         </div>

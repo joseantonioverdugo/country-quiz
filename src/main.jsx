@@ -1,17 +1,17 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import App from './App.jsx'
+import { DataProvider } from './context/DataContext.jsx'
+import Quiz from './Quiz.jsx'
 import Result from './Result.jsx'
 import '../src/scss/app.scss'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
   <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<App />} />
-      <Route path='/result' element={<Result />} />
-    </Routes>
+    <DataProvider>
+      <Routes>
+        <Route path='/' element={<Quiz />} />
+        <Route path='/result' element={<Result />} />
+      </Routes>
+    </DataProvider>
   </BrowserRouter>
-  // </React.StrictMode>
 )
